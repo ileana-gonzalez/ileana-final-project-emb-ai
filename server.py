@@ -1,6 +1,7 @@
 """ Task 6. Deploy as web application using Flask
     Flask server for the emotion detection web app.
     It will be deployed on localhost:5000.
+    Task 7. Incorporate error handling.
 """
 
 from flask import Flask, render_template, request
@@ -23,6 +24,10 @@ def emo_detector():
     joy = response["joy"]
     sadness = response["sadness"]
     dominant_emotion = response["dominant_emotion"]
+    
+    # If the API returns no dominant emotion, show an error message instead of scores.
+    if dominant_emotion is None:
+        return "Invalid text! Please try again!"
     
     return (
         f"For the given statement, the system response is "
