@@ -17,18 +17,18 @@ def emo_detector():
     """Analyze the submitted text and return detected emotions."""
     text_to_analyze = request.args.get("textToAnalyze")
     response = emotion_detector(text_to_analyze)
-    
+
     anger = response["anger"]
     disgust = response["disgust"]
     fear = response["fear"]
     joy = response["joy"]
     sadness = response["sadness"]
     dominant_emotion = response["dominant_emotion"]
-    
+
     # If the API returns no dominant emotion, show an error message instead of scores.
     if dominant_emotion is None:
         return "Invalid text! Please try again!"
-    
+
     return (
         f"For the given statement, the system response is "
         f"'anger': {anger}, 'disgust': {disgust}, 'fear': {fear}, "
@@ -38,6 +38,7 @@ def emo_detector():
 
 @app.route("/")
 def render_index_page():
+    """Render the main application page."""
     return render_template("index.html")
 
 if __name__ == "__main__":
